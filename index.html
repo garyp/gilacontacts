@@ -7,6 +7,16 @@
     <link rel="stylesheet" href="assets/css/master.css" type="text/css" media="screen" />
     -->
     <link rel="stylesheet" href="assets/css/jquery.mobile-1.1.0.min.css" />
+    <style type="text/css">
+        body {
+            text-align: center;
+        }
+        #card_verify img {
+            height: 85px;
+            width: 85px;
+            padding: 10px;
+        }
+    </style>
     <script src="phonegap.js" type="text/javascript" charset="utf-8"></script>
     <script src="childbrowser.js" type="text/javascript" charset="utf-8"></script>
     <script src="assets/js/jquery-1.7.2.min.js"></script>
@@ -32,13 +42,22 @@
         }
 
         function onPhotoDataSuccess(imageURI) {
-            alert('Got image at: ' + imageURI);
+            //alert('Got image at: ' + imageURI);
+            $.mobile.changePage($("#card_verify"));
         }
 
         function capturePhoto() {
             navigator.camera.getPicture(onPhotoDataSuccess, onFail, {
                 destinationType: destinationType.FILE_URI,
             });
+        }
+
+        function submitEmail() {
+            $.mobile.changePage($("#card_verify"));
+        }
+
+        function toggleColor(imgid) {
+            $('#'+imgid).attr('src', $('#'+imgid).attr('src').replace( /\.png$/, 'g.png'));
         }
 
         function doTwitterLogin() {
@@ -48,7 +67,7 @@
                     $.mobile.changePage($("#card_entry"));
                 }
             };
-            childBrowser.showWebPage(ourServer + "/app/connect/twitter", {
+            childBrowser.showWebPage(ourServer + "/auth/twitter", {
                 showLocationBar: false,
                 showAddress: false,
                 showNavigationBar: false,
@@ -57,6 +76,7 @@
     </script>
 </head>
 <body>
+    <!--
     <div data-role="page" id="login_page">
         <div data-role="header">
             <h1>Gila Contacts</h1>
@@ -67,6 +87,7 @@
             <a href="choose.html"> Choose Social Networks </a>
         </div>
     </div>
+    -->
 
     <div data-role="page" id="card_entry">
         <div data-role="header">
@@ -77,6 +98,33 @@
             <button onclick="capturePhoto();">Scan Card</button>
             <p>-- OR --</p>
             <p>Enter email: <input type="text"/></p>
+            <button onclick="submitEmail();">Submit</button>
+        </div>
+    </div>
+
+    <div data-role="page" id="card_verify">
+        <div data-role="header">
+            <h1>Gila Contacts</h1>
+        </div>
+
+        <div data-role="content">
+            <h2>Found Kris Constable (kris@ideawave.ca)</h2>
+
+            <p>Which networks would you like to add them to?</p>
+            <table style="margin-left: auto; margin-right: auto;">
+                <tr>
+                    <td><img id="linkedin" src="icons/linkedin.png" onclick="toggleColor('linkedin');"/></td>
+                    <td><img id="google" src="icons/google.png" onclick="toggleColor('google');"/></td>
+                </tr>
+                <tr>
+                    <td><img id="foursquare" src="icons/foursquare.png" onclick="toggleColor('foursquare');"/></td>
+                    <td><img id="facebook" src="icons/facebook.png" onclick="toggleColor('facebook');"/></td>
+                </tr>
+                <tr>
+                    <td><img id="twitter" src="icons/twitter.png" onclick="toggleColor('twitter');"/></td>
+                    <td><img id="addressbook" src="icons/addressbook.png" onclick="toggleColor('addressbook');"/></td>
+                </tr>
+            </table>
         </div>
     </div>
 </body>
