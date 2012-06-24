@@ -1,0 +1,3 @@
+
+When you get home from AngelHack, you'll likely have a pocket full of business cards from all of the interesting people you've met. At some point you'll sit down and take the next step with the cards; perhaps adding the contacts to LinkedIn, twitter, your address book, and a handful of other sites. You also might write some notes on the back of the card to remind you of why that individual stood out to you. 
+We've decided to streamline this process for you. GilaContacts allows you to add your contacts to many places, at once. You can also add notes or tags that are later searchable, for you, such as "developer", "potential cofounder" or "angel investor".
