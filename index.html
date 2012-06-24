@@ -24,9 +24,16 @@
 		<script src="assets/js/app.js" type="text/javascript" charset="utf-8"></script>
 		-->
 		<script type="text/javascript" charset="utf-8">
+                        var ourServer = "http://www.google.com/";
+                        var doneURL = "http://realify.com/";
+
+                        var destinationType;
+                        var childBrowser;
+
 			document.addEventListener("deviceready", onDeviceReady, false);
 			function onDeviceReady() {
-				destinationType=navigator.camera.DestinationType;
+				destinationType = navigator.camera.DestinationType;
+                                childBrowser = window.plugins.childBrowser;
 			}
 			
 			function onFail(message) {
@@ -39,13 +46,25 @@
 
 			function capturePhoto() {
 				navigator.camera.getPicture(onPhotoDataSuccess, onFail, {
-					destinationType: navigator.camera.DestinationType.FILE_URI,
+					destinationType: destinationType.FILE_URI,
 				});
 			}
+
+                        function doTwitterLogin() {
+                            childBrowser.onLocationChange = function(url) {
+                                if (url == doneURL) {
+                                    childBrowser.close();
+                                }
+                            };
+                            childBrowser.showWebPage(ourServer, {
+                                showNavigationBar: false,
+                            });
+                        }
 		</script>
 	</head>
 	<body>
  		<div id="title_bar">Phone<strong>Gap</strong> Training App</div>
  		<button onclick="capturePhoto();">Capture Photo</button>
+                <button onclick="doTwitterLogin();">Log in with Twitter</button>
 	</body>
 </html>
