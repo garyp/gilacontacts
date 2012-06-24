@@ -1,0 +1,4 @@
+Meetup: 
+
+curl 'http://api.meetup.com/events?_=1340497788286&radius=25.0&order=time&member_id=11930517&offset=0&format=json&page=20&fields=&sig_id=11930517&sig=241b7922fa7477cbf6b5ff225cac24db7e8f7b12'
+
