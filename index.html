@@ -2,20 +2,26 @@
 <html>
 <head>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width" />
-    <title>Training App</title>
+    <title>Gila Contacts</title>
     <!--
     <link rel="stylesheet" href="assets/css/master.css" type="text/css" media="screen" />
     -->
+    <link rel="stylesheet" href="assets/css/jquery.mobile-1.1.0.min.css" />
     <script src="phonegap.js" type="text/javascript" charset="utf-8"></script>
     <script src="childbrowser.js" type="text/javascript" charset="utf-8"></script>
+    <script src="assets/js/jquery-1.7.2.min.js"></script>
+    <script src="assets/js/jquery.mobile-1.1.0.min.js"></script>
     <script type="text/javascript" charset="utf-8">
-        var ourServer = "http://www.google.com/";
-        var doneURL = "http://realify.com/";
+        var ourServer = "http://gilamonster.herokuapp.com/";
+        var doneURL = ourServer + "done";
+
+        $( function () {
+                document.addEventListener("deviceready", onDeviceReady, false);
+        });
 
         var destinationType;
         var childBrowser;
 
-        document.addEventListener("deviceready", onDeviceReady, false);
         function onDeviceReady() {
             destinationType = navigator.camera.DestinationType;
             childBrowser = window.plugins.childBrowser;
@@ -39,17 +45,38 @@
             childBrowser.onLocationChange = function(url) {
                 if (url == doneURL) {
                     childBrowser.close();
+                    $.mobile.changePage($("#card_entry"));
                 }
             };
-            childBrowser.showWebPage(ourServer, {
+            childBrowser.showWebPage(ourServer + "/app/connect/twitter", {
+                showLocationBar: false,
+                showAddress: false,
                 showNavigationBar: false,
             });
         }
     </script>
 </head>
 <body>
-    <div id="title_bar">Phone<strong>Gap</strong> Training App</div>
-    <button onclick="capturePhoto();">Capture Photo</button>
-    <button onclick="doTwitterLogin();">Log in with Twitter</button>
+    <div data-role="page" id="login_page">
+        <div data-role="header">
+            <h1>Gila Contacts</h1>
+        </div>
+
+        <div data-role="content">
+            <button onclick="doTwitterLogin();">Log in with Twitter</button>
+        </div>
+    </div>
+
+    <div data-role="page" id="card_entry">
+        <div data-role="header">
+            <h1>Gila Contacts</h1>
+        </div>
+
+        <div data-role="content">
+            <button onclick="capturePhoto();">Scan Card</button>
+            <p>-- OR --</p>
+            <p>Enter email: <input type="text"/></p>
+        </div>
+    </div>
 </body>
 </html>
