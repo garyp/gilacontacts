@@ -1,70 +1,55 @@
 <!doctype html>
 <html>
-	<head>
-		<meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width" />
-		<title>Training App</title>
-		<!--
-		<link rel="stylesheet" href="assets/css/master.css" type="text/css" media="screen" />
-		-->
-		<script src="phonegap.js" type="text/javascript" charset="utf-8"></script>
-                <script src="childbrowser.js" type="text/javascript" charset="utf-8"></script>
-		<!--
-		<script src="assets/js/xui.js" type="text/javascript" charset="utf-8"></script>
-		
-		<script src="assets/js/lawnchair/adaptors/LawnchairAdaptorHelpers.js" type="text/javascript" charset="utf-8"></script>
-		
-		<script src="assets/js/lawnchair/adaptors/DOMStorageAdaptor.js" type="text/javascript" charset="utf-8"></script>
-		
-		<script src="assets/js/lawnchair/adaptors/WebkitSQLiteAdaptor.js" type="text/javascript" charset="utf-8"></script>
-		
-		<script src="assets/js/lawnchair/Lawnchair.js" type="text/javascript" charset="utf-8"></script>
-		
-		<script src="assets/js/dsl.js" type="text/javascript" charset="utf-8"></script>
-		
-		<script src="assets/js/app.js" type="text/javascript" charset="utf-8"></script>
-		-->
-		<script type="text/javascript" charset="utf-8">
-                        var ourServer = "http://www.google.com/";
-                        var doneURL = "http://realify.com/";
+<head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width" />
+    <title>Training App</title>
+    <!--
+    <link rel="stylesheet" href="assets/css/master.css" type="text/css" media="screen" />
+    -->
+    <script src="phonegap.js" type="text/javascript" charset="utf-8"></script>
+    <script src="childbrowser.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript" charset="utf-8">
+        var ourServer = "http://www.google.com/";
+        var doneURL = "http://realify.com/";
 
-                        var destinationType;
-                        var childBrowser;
+        var destinationType;
+        var childBrowser;
 
-			document.addEventListener("deviceready", onDeviceReady, false);
-			function onDeviceReady() {
-				destinationType = navigator.camera.DestinationType;
-                                childBrowser = window.plugins.childBrowser;
-			}
-			
-			function onFail(message) {
-				alert('Failed because: ' + message);
-			}
-			
-			function onPhotoDataSuccess(imageURI) {
-				alert('Got image at: ' + imageURI);
-			}
+        document.addEventListener("deviceready", onDeviceReady, false);
+        function onDeviceReady() {
+            destinationType = navigator.camera.DestinationType;
+            childBrowser = window.plugins.childBrowser;
+        }
 
-			function capturePhoto() {
-				navigator.camera.getPicture(onPhotoDataSuccess, onFail, {
-					destinationType: destinationType.FILE_URI,
-				});
-			}
+        function onFail(message) {
+            alert('Failed because: ' + message);
+        }
 
-                        function doTwitterLogin() {
-                            childBrowser.onLocationChange = function(url) {
-                                if (url == doneURL) {
-                                    childBrowser.close();
-                                }
-                            };
-                            childBrowser.showWebPage(ourServer, {
-                                showNavigationBar: false,
-                            });
-                        }
-		</script>
-	</head>
-	<body>
- 		<div id="title_bar">Phone<strong>Gap</strong> Training App</div>
- 		<button onclick="capturePhoto();">Capture Photo</button>
-                <button onclick="doTwitterLogin();">Log in with Twitter</button>
-	</body>
+        function onPhotoDataSuccess(imageURI) {
+            alert('Got image at: ' + imageURI);
+        }
+
+        function capturePhoto() {
+            navigator.camera.getPicture(onPhotoDataSuccess, onFail, {
+                destinationType: destinationType.FILE_URI,
+            });
+        }
+
+        function doTwitterLogin() {
+            childBrowser.onLocationChange = function(url) {
+                if (url == doneURL) {
+                    childBrowser.close();
+                }
+            };
+            childBrowser.showWebPage(ourServer, {
+                showNavigationBar: false,
+            });
+        }
+    </script>
+</head>
+<body>
+    <div id="title_bar">Phone<strong>Gap</strong> Training App</div>
+    <button onclick="capturePhoto();">Capture Photo</button>
+    <button onclick="doTwitterLogin();">Log in with Twitter</button>
+</body>
 </html>
