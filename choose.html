@@ -3,26 +3,50 @@
 <title> Which networks? </title>
 <link rel="stylesheet" href="assets/css/master.css" type="text/css" media="screen" />
 
+<script src="assets/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function()
+{ 
+/*
+$('#group1').click(function()
+{
+if($('#group1:checked').val()!=null)
+{
+$('#imgImage').attr('src',$('#imgImage').attr('src').replace(/\.png$/, 'g.png'));
+}
+
+}
+)
+*/
+function toggleColor() {
+this.attr('src', this.attr('src').replace( /\.png$/, 'g.png'));
+})
+
+</script>
+
+
 </head>
 <body>
 Which networks would you like to add $contact to?
 <center>
+<form name="addNetworks">
 <table>
 <col />
 <col span="2" />
 <tr>
-  <td><img src="icons/linkedin.png" height="85" width="85"><input type="checkbox" class="largerCheckbox" name="group1" value="linkedin">  </td>
+  <td><img src="icons/linkedin.png" height="85" width="85" onclick="toggleColor();"><input type="checkbox" class="largerCheckbox" name="group1" value="linkedin">  </td>
   <td><img src="icons/google.png" height="85" width="85"><input type="checkbox" class="largerCheckbox" name="group1" value="google"></td>
 </tr>
 <tr>
   <td><img src="icons/foursquare.png" height="85" width="85"> <input type="checkbox" class="largerCheckbox" name="group1" value="foursquare"> </td>
-  <td><img src="icons/facebook.png" height="85" width="85"> <input type="checkbox" class="largerCheckbox" name="group1" value="facebook"> </td>
+  <td><img src="icons/facebook.png" id="imgImage" name="imgImage" height="85" width="85"> <input type="checkbox" class="largerCheckbox" id="group1" name="group1" value="facebook"> </td>
 </tr>
 <tr>
-  <td><img src="icons/Twitter.png" height="85" width="85"> <input type="checkbox" class="largerCheckbox" name="group1" value="twitter"> </td>
+  <td><img src="icons/twitter.png" height="85" width="85"> <input type="checkbox" class="largerCheckbox" name="group1" value="twitter"> </td>
   <td><img src="icons/addressbook.png" height="85" width="85"> <input type="checkbox" class="largerCheckbox" name="group1" value="addressbook"> </td>
 </tr>
 </table>
+</form>
 </center>
 </body>
 </html>
